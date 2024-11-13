@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=SSHFiles
+Exec=/home/john/dev/qt/SSHFileTransferLarge/build/Desktop_Qt_6_8_0-Release/SSHFileTransfer
+Icon=/home/john/dev/qt/SSHFileTransferLarge/build/Desktop_Qt_6_8_0-Release/cat
+Comment=Files and directories over SSH
+Terminal=false
+Categories=Utility;

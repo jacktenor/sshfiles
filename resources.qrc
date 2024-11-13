@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>cat.png</file>
+        <file>right.png</file>
+        <file>left.png</file>
+    </qresource>
+</RCC>
