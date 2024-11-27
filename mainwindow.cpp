@@ -1,71 +1,63 @@
+#include "mainwindow.h"
+#include "filetransferworker.h"
+#include "ui_mainwindow.h"
+#include <QMessageBox>
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 #include <QDir>
 #include <QFileDialog>
 #include <QThread>
-#include "filetransferworker.h"
 #include <QSettings>
 #include <QDebug>
-#include <QGraphicsPixmapItem>  // To load the image
-#include <QGraphicsScene>       // To create the graphics scene
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <QGraphicsView>
-#include <QMessageBox>
 
+// Constructor of MainWindow class
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), tcpSocket(new QTcpSocket(this)), session(nullptr), sftp_session(nullptr), settings("Sativa.inc", "SSHFiletransfer")
 {
     ui->setupUi(this);
 
-    // Create the QGraphicsScene
+    // Create and set the QGraphicsScene
     QGraphicsScene *scene = new QGraphicsScene(this);
-    // Set the scene to the QGraphicsView
+    ui->graphicsView->setScene(scene);
 
-
-    // Debugging: Check if the view is actually set
+    // Debugging output
     qDebug() << "graphicsView initialized and scene set.";
 
     // Load an image from resources (check the file path in the .qrc file)
-    QPixmap pixmap(":/cat.png");  // Or use ":/images/cat.png" if you moved the image to an images folder
-
+    QPixmap pixmap(":/cat.png");
     if (pixmap.isNull()) {
         qDebug() << "Failed to load image ':/cat.png'. Ensure it's in the resources.";
     } else {
-        // Add the pixmap to the scene
         QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap);
         scene->addItem(item);
         qDebug() << "Image successfully loaded and added to the scene.";
-
     }
 
+    // Initialize UI components and connections as needed
     ui->uploadProgressBar->setValue(0);
     ui->downloadProgressBar->setValue(0);
 
     ui->remoteFileTree->setContextMenuPolicy(Qt::CustomContextMenu);
-
-    // Ensure the IP and Username fields are editable for manual input
     ui->ipComboBox->setEditable(true);
     ui->usernameComboBox->setEditable(true);
-
     ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
 
-    // Load login history when the application starts
+    // Load login history on application start
     loadLoginDetails();
 
+    // Setup context menu, signal connections, etc.
     connect(ui->remoteFileTree, &QTreeWidget::customContextMenuRequested, this, &MainWindow::on_remoteTreeContextMenuRequested);
-
-    // Connect signals to update the password based on previous entries
     connect(ui->ipComboBox, &QComboBox::editTextChanged, this, &MainWindow::updatePasswordField);
     connect(ui->usernameComboBox, &QComboBox::editTextChanged, this, &MainWindow::updatePasswordField);
-
-    // Connect tree item clicked signals to respective slots
     connect(ui->remoteFileTree, &QTreeWidget::itemClicked, this, &MainWindow::on_itemClicked);
     connect(ui->localFileTree, &QTreeWidget::itemClicked, this, &MainWindow::on_localItemClicked);
 }
 
+// Destructor of MainWindow class
 MainWindow::~MainWindow()
 {
     delete ui;
-
     if (sftp_session) {
         libssh2_sftp_shutdown(sftp_session);
     }
@@ -75,7 +67,6 @@ MainWindow::~MainWindow()
     }
     libssh2_exit();
 }
-
 void MainWindow::on_connectButton_clicked()
 {
     QString host = ui->ipComboBox->currentText();
@@ -90,6 +81,7 @@ void MainWindow::on_connectButton_clicked()
 
 void MainWindow::on_itemClicked(QTreeWidgetItem *item)
 {
+
     QString path = item->data(0, Qt::UserRole).toString();  // Full path
     bool isDirectory = item->data(0, Qt::UserRole + 1).toBool();
 

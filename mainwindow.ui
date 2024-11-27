@@ -6,23 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>871</width>
+    <width>870</width>
     <height>575</height>
    </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::ContextMenuPolicy::ActionsContextMenu</enum>
   </property>
   <property name="windowTitle">
    <string>SSHFiles</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 0, 0);</string>
+   <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="passwordLineEdit">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>144</x>
       <y>185</y>
-      <width>150</width>
+      <width>161</width>
       <height>30</height>
      </rect>
     </property>
@@ -37,11 +41,14 @@ background-color: rgb(243, 243, 243);</string>
     <property name="echoMode">
      <enum>QLineEdit::EchoMode::Password</enum>
     </property>
+    <property name="placeholderText">
+     <string/>
+    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>35</x>
+      <x>30</x>
       <y>115</y>
       <width>106</width>
       <height>22</height>
@@ -57,7 +64,7 @@ background-color: rgb(243, 243, 243);</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>50</x>
       <y>155</y>
       <width>91</width>
       <height>22</height>
@@ -76,7 +83,7 @@ background-color: rgb(243, 243, 243);</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>35</x>
       <y>195</y>
       <width>81</width>
       <height>20</height>
@@ -92,9 +99,9 @@ background-color: rgb(243, 243, 243);</string>
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>145</x>
       <y>225</y>
-      <width>151</width>
+      <width>81</width>
       <height>30</height>
      </rect>
     </property>
@@ -110,7 +117,7 @@ background-color: rgb(243, 243, 243);</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>105</x>
+      <x>95</x>
       <y>225</y>
       <width>41</width>
       <height>31</height>
@@ -126,9 +133,9 @@ background-color: rgb(243, 243, 243);</string>
    <widget class="QPushButton" name="connectButton">
     <property name="geometry">
      <rect>
-      <x>175</x>
+      <x>140</x>
       <y>270</y>
-      <width>100</width>
+      <width>86</width>
       <height>35</height>
      </rect>
     </property>
@@ -341,7 +348,10 @@ background-color: rgb(243, 243, 243);</string>
      <string/>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 12, 177); color: white; border-radius: 5px</string>
+     <string notr="true">QPushButton { border-radius: 6px; background-color: rgb(0, 12, 177); color: white; padding: 5px; } QPushButton:hover { background-color: rgb(64, 0, 255); transition: all 0.2s ease; }
+
+QPushButton:pressed { background-color: #000051;
+transform: scale(0.95); }</string>
     </property>
     <property name="text">
      <string>Connect</string>
@@ -362,8 +372,8 @@ background-color: rgb(243, 243, 243);</string>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);
 font: 600 12pt &quot;Noto Sans&quot;;
-selection-background-color: rgb(0, 12, 177);
-background-color: rgb(243, 243, 243);</string>
+background-color: rgb(243, 243, 243);
+selection-background-color: rgb(12, 0, 186);</string>
     </property>
     <property name="sizeAdjustPolicy">
      <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
@@ -483,9 +493,9 @@ color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="usernameComboBox">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>144</x>
       <y>145</y>
-      <width>150</width>
+      <width>161</width>
       <height>30</height>
      </rect>
     </property>
@@ -504,9 +514,9 @@ background-color: rgb(243, 243, 243);</string>
    <widget class="QComboBox" name="ipComboBox">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>144</x>
       <y>105</y>
-      <width>150</width>
+      <width>161</width>
       <height>30</height>
      </rect>
     </property>
@@ -522,7 +532,7 @@ background-color: rgb(243, 243, 243);</string>
    <widget class="QCheckBox" name="savePasswordCheckBox">
     <property name="geometry">
      <rect>
-      <x>124</x>
+      <x>120</x>
       <y>195</y>
       <width>16</width>
       <height>16</height>
@@ -556,23 +566,47 @@ border-color: rgb(255, 255, 255);
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>320</y>
-      <width>191</width>
-      <height>176</height>
+      <x>80</x>
+      <y>315</y>
+      <width>200</width>
+      <height>175</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>200</width>
+      <height>325</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">border-image: url(:/cat.png);</string>
     </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+    </property>
     <property name="sizeAdjustPolicy">
-     <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+     <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+    </property>
+    <property name="interactive">
+     <bool>false</bool>
+    </property>
+    <property name="resizeAnchor">
+     <enum>QGraphicsView::ViewportAnchor::AnchorViewCenter</enum>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>355</x>
+      <x>350</x>
       <y>0</y>
       <width>166</width>
       <height>36</height>
@@ -647,7 +681,7 @@ background-color: rgb(0, 12, 177);</string>
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>295</x>
       <y>40</y>
       <width>276</width>
       <height>26</height>
@@ -699,20 +733,20 @@ background-color: rgb(0, 12, 177);</string>
    <zorder>usernameComboBox</zorder>
    <zorder>ipComboBox</zorder>
    <zorder>savePasswordCheckBox</zorder>
-   <zorder>graphicsView</zorder>
    <zorder>label_5</zorder>
    <zorder>label_7</zorder>
    <zorder>label_8</zorder>
    <zorder>label_9</zorder>
    <zorder>connectButton</zorder>
    <zorder>label_6</zorder>
+   <zorder>graphicsView</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>871</width>
+     <width>870</width>
      <height>27</height>
     </rect>
    </property>
