@@ -6,17 +6,16 @@
 #include <libssh2.h>
 #include <libssh2_sftp.h>
 #include <QFile>
+#include <QString>
 
 class FileTransferWorker : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit FileTransferWorker(LIBSSH2_SFTP *sftpSession, QObject *parent = nullptr);
-
+    explicit FileTransferWorker(LIBSSH2_SFTP *sftpSession, LIBSSH2_SESSION *session, QObject *parent = nullptr);
     void setUploadParams(const QString &localPath, const QString &remotePath);
     void setDownloadParams(const QString &remotePath, const QString &localPath);
-
 public slots:
     void uploadFile();
     void downloadFile();
@@ -28,6 +27,7 @@ signals:
 
 private:
     LIBSSH2_SFTP *sftpSession;
+    LIBSSH2_SESSION *session;  // Add this declaration
     QString localPath;
     QString remotePath;
 };

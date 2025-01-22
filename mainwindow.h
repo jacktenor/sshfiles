@@ -12,6 +12,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "ui_mainwindow.h"
+#include <QKeyEvent> // Required for event filtering
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +27,10 @@ public:
     ~MainWindow();
     QGraphicsScene *scene;  // Graphics scene to hold the image
     QGraphicsView *graphicsView;
+
+protected:
+    // Declare the event filter function
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
     void on_connectButton_clicked();
@@ -52,6 +57,7 @@ private:
     void loadLoginDetails();
     bool zipRemoteDirectory(const QString &remoteDirPath, const QString &remoteZipPath);
     void on_remoteTreeContextMenuRequested(const QPoint &pos);
+
     // Auto-fill history from QSettings
     QSettings settings;
 };

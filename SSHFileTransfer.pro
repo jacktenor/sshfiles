@@ -18,9 +18,8 @@ FORMS += \
     mainwindow.ui
 
 # Include path for libssh2
-INCLUDEPATH += /usr/include   # On Linux
-
-LIBS += -L/usr/lib/x86_64-linux-gnu -lssh2  # On Linux
+INCLUDEPATH += /usr/local/include
+LIBS += -L/usr/local/lib -lssh2   # On Linux
 
 # Deployment rules
 RESOURCES += \
